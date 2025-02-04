@@ -1,5 +1,5 @@
 import Card from "../components/Card.tsx";
-import { ShoppingCart } from "lucide-react";
+import CarrinhoBtn from "../components/CarrinhoBtn.tsx";
 
 function Main() {
   return (
@@ -8,9 +8,7 @@ function Main() {
         <div className="flex justify-between items-center mb-8 ">
           <h1 className="text-4xl font-bold">Max Store</h1>
 
-          <button className="w-10 h-10 rounded-md cursor-pointer border border-gray-300 grid place-items-center">
-            <ShoppingCart size={16} />
-          </button>
+          <CarrinhoBtn />
         </div>
 
         <div className="w-full grid grid-cols-4 gap-6">

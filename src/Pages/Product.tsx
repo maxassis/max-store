@@ -1,5 +1,6 @@
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import CarrinhoBtn from "../components/CarrinhoBtn";
 
 export default function Product() {
   return (
@@ -11,9 +12,7 @@ export default function Product() {
             <h1 className="text-gray-600">Voltar para a loja</h1>
           </Link>
 
-          <button className="w-10 h-10 rounded-md cursor-pointer border border-gray-300 grid place-items-center">
-            <ShoppingCart size={16} />
-          </button>
+          <CarrinhoBtn />
         </div>
 
         <div className="grid-cols-2 grid gap-8">
