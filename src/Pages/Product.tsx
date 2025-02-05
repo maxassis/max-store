@@ -2,12 +2,16 @@ import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import CarrinhoBtn from "../components/CarrinhoBtn";
+import { carrinhoStore } from "../store/carrinho.store";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
+  qtdProduct: number;
 }
 
 async function fetchProduct(id: string): Promise<Product> {
@@ -22,6 +26,7 @@ async function fetchProduct(id: string): Promise<Product> {
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
+  const { addItem, itens } = carrinhoStore();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["product", id],
@@ -36,6 +41,25 @@ export default function ProductPage() {
         Erro ao carregar o produto.
       </p>
     );
+
+  function addToCart(product: Product) {
+    const isProductInCart = itens.some((item) => item.id === product.id);
+
+    if (!isProductInCart) {
+      addItem(product);
+      // alert("Produto adicionado ao carrinho!");
+      toast.success("Produto adicionado ao carrinho!", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else {
+      // alert("Este produto já está no carrinho!");
+      toast.warning("Este produto já está no carrinho!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
+  }
 
   return (
     <div className="bg-gray-50 w-full h-full">
@@ -67,16 +91,29 @@ export default function ProductPage() {
 
             <p className="mt-5 text-gray-600">
               Notebook premium com processador de última geração e design
-              elegante.
+              elegante. {JSON.stringify(itens)}
             </p>
 
-            <button className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm">
+            <button
+              className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer"
+              onClick={() =>
+                addToCart({
+                  id: id!,
+                  qtdProduct: 1,
+                  name: "Tablet Air",
+                  price: 600,
+                  image:
+                    "https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafkreibbibk4gsdpalapcmm4tctuj3ctonrvdd3m23qwvrtdsxtrh22na4",
+                })
+              }
+            >
               <ShoppingCart size={16} color="white" />
               Adicionar ao carrinho
             </button>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

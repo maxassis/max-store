@@ -1,15 +1,20 @@
 import { Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
+import { carrinhoStore } from "../store/carrinho.store";
 
 export default function CarrinhoBtn() {
   const [count, setCount] = useState(0);
+  const { increaseQuantity, decreaseQuantity } = carrinhoStore();
 
-  function soma() {
+  function soma(id: number) {
     setCount(count + 1);
+    increaseQuantity(id);
   }
 
-  function sub() {
+  function sub(id: number) {
+    if (count === 0) return;
     setCount(count - 1);
+    decreaseQuantity(id);
   }
 
   return (
@@ -25,7 +30,7 @@ export default function CarrinhoBtn() {
 
         <div className="flex items-center gap-4 mt-2">
           <button
-            onClick={sub}
+            onClick={() => sub(10)}
             className="h-8 w-8 text-2xl font-medium cursor-pointer border rounded-md grid place-items-center border-gray-300"
           >
             <span>
@@ -34,7 +39,7 @@ export default function CarrinhoBtn() {
           </button>
           {count}
           <button
-            onClick={soma}
+            onClick={() => soma(10)}
             className="h-8 w-8 text-2xl font-medium cursor-pointer border rounded-md grid place-items-center border-gray-300"
           >
             <Plus size={16} />

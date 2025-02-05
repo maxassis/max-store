@@ -45,6 +45,12 @@ export const carrinhoStore = create<State>((set, get) => ({
       }
     }),
 
+  // Remove um item do carrinho
+  removeItem: (id) =>
+    set((state) => ({
+      itens: state.itens.filter((item) => item.id !== id),
+    })),
+
   // Aumenta a quantidade de um item
   increaseQuantity: (id) =>
     set((state) => ({
@@ -61,12 +67,6 @@ export const carrinhoStore = create<State>((set, get) => ({
           item.id === id ? { ...item, qtdProduct: item.qtdProduct - 1 } : item
         )
         .filter((item) => item.qtdProduct > 0), // Remove o item se a quantidade for 0
-    })),
-
-  // Remove um item do carrinho
-  removeItem: (id) =>
-    set((state) => ({
-      itens: state.itens.filter((item) => item.id !== id),
     })),
 
   // Calcula o valor total do carrinho

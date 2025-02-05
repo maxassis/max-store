@@ -20,7 +20,7 @@ const Sidebar = () => {
           carrinho ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-400 p-6 z-50`}
       >
-        {/* {JSON.stringify(itens)} */}
+        {JSON.stringify(itens)}
         <div className="flex justify-between items-center">
           <span className="text-lg font-semibold">Carrinho de Compras</span>
           <X
@@ -32,8 +32,8 @@ const Sidebar = () => {
         </div>
 
         <div>
-          <CardCarrinho />
-          <CardCarrinho />
+          {/* <CardCarrinho />
+          <CardCarrinho /> */}
         </div>
 
         <div className="mt-4">
@@ -42,19 +42,7 @@ const Sidebar = () => {
             <span className="text-lg font-medium">R$ {valorTotal()}</span>
           </div>
 
-          <button
-            className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm"
-            onClick={() =>
-              addItem({
-                id: 10,
-                qtdProduct: 1,
-                name: "Tablet Air",
-                price: 600,
-                image:
-                  "https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafkreibbibk4gsdpalapcmm4tctuj3ctonrvdd3m23qwvrtdsxtrh22na4",
-              })
-            }
-          >
+          <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm cursor-pointer">
             Finalizar Compra
           </button>
         </div>
