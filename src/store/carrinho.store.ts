@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 type Item = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
@@ -13,9 +13,9 @@ type State = {
   itens: Item[];
   toggle: () => void;
   addItem: (item: Item) => void;
-  increaseQuantity: (id: number) => void;
-  decreaseQuantity: (id: number) => void;
-  removeItem: (id: number) => void;
+  increaseQuantity: (id: string) => void;
+  decreaseQuantity: (id: string) => void;
+  removeItem: (id: string) => void;
   valorTotal: () => number;
   totalItems: () => number;
 };

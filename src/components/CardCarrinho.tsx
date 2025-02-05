@@ -2,16 +2,28 @@ import { Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
 import { carrinhoStore } from "../store/carrinho.store";
 
-export default function CarrinhoBtn() {
-  const [count, setCount] = useState(0);
-  const { increaseQuantity, decreaseQuantity } = carrinhoStore();
+interface CardCarrinhoProps {
+  id: string;
+  name: string;
+  price: number;
+  qtdProduct: number;
+}
 
-  function soma(id: number) {
+export default function CarrinhoBtn({
+  id,
+  name,
+  price,
+  qtdProduct,
+}: CardCarrinhoProps) {
+  const { increaseQuantity, decreaseQuantity, removeItem } = carrinhoStore();
+  const [count, setCount] = useState(qtdProduct);
+
+  function soma(id: string) {
     setCount(count + 1);
     increaseQuantity(id);
   }
 
-  function sub(id: number) {
+  function sub(id: string) {
     if (count === 0) return;
     setCount(count - 1);
     decreaseQuantity(id);
@@ -25,28 +37,31 @@ export default function CarrinhoBtn() {
         alt=""
       />
       <div className="flex flex-1 flex-col ">
-        <span className="block">Tablet Air</span>
-        <span className="block text-sm text-gray-600">R$600,00</span>
+        <span className="block">{name}</span>
+        <span className="block text-sm text-gray-600">R${price}</span>
 
         <div className="flex items-center gap-4 mt-2">
           <button
-            onClick={() => sub(10)}
+            onClick={() => sub(id)}
             className="h-8 w-8 text-2xl font-medium cursor-pointer border rounded-md grid place-items-center border-gray-300"
           >
             <span>
               <Minus size={16} />
             </span>
           </button>
-          {count}
+          {qtdProduct}
           <button
-            onClick={() => soma(10)}
+            onClick={() => soma(id)}
             className="h-8 w-8 text-2xl font-medium cursor-pointer border rounded-md grid place-items-center border-gray-300"
           >
             <Plus size={16} />
           </button>
         </div>
       </div>
-      <button className="h-10 w-10 cursor-pointer rounded-md hover:bg-gray-100 grid place-items-center">
+      <button
+        className="h-10 w-10 cursor-pointer rounded-md hover:bg-gray-100 grid place-items-center"
+        onClick={() => removeItem(id)}
+      >
         <X size={16} />
       </button>
     </div>

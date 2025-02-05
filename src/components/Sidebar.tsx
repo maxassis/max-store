@@ -3,8 +3,7 @@ import { X } from "lucide-react";
 import CardCarrinho from "./CardCarrinho";
 
 const Sidebar = () => {
-  const { carrinho, toggle, itens, addItem, valorTotal, totalItems } =
-    carrinhoStore();
+  const { carrinho, toggle, itens, valorTotal } = carrinhoStore();
 
   return (
     <>
@@ -20,7 +19,6 @@ const Sidebar = () => {
           carrinho ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-400 p-6 z-50`}
       >
-        {JSON.stringify(itens)}
         <div className="flex justify-between items-center">
           <span className="text-lg font-semibold">Carrinho de Compras</span>
           <X
@@ -32,8 +30,15 @@ const Sidebar = () => {
         </div>
 
         <div>
-          {/* <CardCarrinho />
-          <CardCarrinho /> */}
+          {itens.map((item) => (
+            <CardCarrinho
+              id={item.id}
+              key={item.id}
+              name={item.name}
+              qtdProduct={item.qtdProduct}
+              price={item.price}
+            />
+          ))}
         </div>
 
         <div className="mt-4">

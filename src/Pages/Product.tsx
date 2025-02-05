@@ -91,7 +91,7 @@ export default function ProductPage() {
 
             <p className="mt-5 text-gray-600">
               Notebook premium com processador de última geração e design
-              elegante. {JSON.stringify(itens)}
+              elegante.
             </p>
 
             <button
