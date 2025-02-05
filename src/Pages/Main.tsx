@@ -1,37 +1,47 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Card from "../components/Card.tsx";
 import CarrinhoBtn from "../components/CarrinhoBtn.tsx";
 
-interface Products {
+interface Product {
   id: number;
   name: string;
   price: string;
   image: string;
 }
 
-function Main() {
-  const [data, setData] = useState<Products[]>([]);
+async function fetchProducts(): Promise<Product[]> {
+  const response = await fetch(
+    "https://run.mocky.io/v3/09ec48e4-6cc8-45a9-8f9c-eb841cb468ed"
+  );
+  if (!response.ok) {
+    throw new Error("Erro ao buscar os produtos");
+  }
+  return response.json();
+}
 
-  useEffect(() => {
-    fetch("https://run.mocky.io/v3/09ec48e4-6cc8-45a9-8f9c-eb841cb468ed")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      });
-  }, []);
+function Main() {
+  const { data, isError } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
+
+  if (isError)
+    return (
+      <p className="text-center text-xl text-red-500">
+        Erro ao carregar os produtos.
+      </p>
+    );
 
   return (
     <div className="bg-gray-50 w-full h-full">
-      <div className="max-w-[87.5rem] h-full m-auto p-10 ">
-        <div className="flex justify-between items-center mb-8 ">
+      <div className="max-w-[87.5rem] h-full m-auto p-10">
+        <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Max Store</h1>
-
           <CarrinhoBtn />
         </div>
 
         <div className="w-full grid grid-cols-4 gap-6">
-          {data.map((product) => (
+          {data?.map((product) => (
             <Card
               key={product.id}
               name={product.name}

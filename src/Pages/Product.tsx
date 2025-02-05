@@ -1,7 +1,7 @@
 import { ArrowLeft, ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import CarrinhoBtn from "../components/CarrinhoBtn";
-import { useEffect, useState } from "react";
 
 interface Product {
   id: number;
@@ -10,21 +10,36 @@ interface Product {
   image: string;
 }
 
-export default function Product() {
-  const [data, setData] = useState<Product>();
+async function fetchProduct(id: string): Promise<Product> {
+  const response = await fetch(
+    `https://run.mocky.io/v3/063305e4-5648-4083-b0c7-96acab55c1ae`
+  );
+  if (!response.ok) {
+    throw new Error("Erro ao buscar o produto");
+  }
+  return response.json();
+}
 
-  useEffect(() => {
-    fetch("https://run.mocky.io/v3/063305e4-5648-4083-b0c7-96acab55c1ae")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      });
-  }, []);
+export default function ProductPage() {
+  const { id } = useParams<{ id: string }>();
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => fetchProduct(id!),
+    enabled: !!id,
+  });
+
+  if (isLoading) return <p className="text-center text-xl">Carregando...</p>;
+  if (isError)
+    return (
+      <p className="text-center text-xl text-red-500">
+        Erro ao carregar o produto.
+      </p>
+    );
 
   return (
     <div className="bg-gray-50 w-full h-full">
-      <div className="max-w-[87.5rem] h-screen m-auto p-8 ">
+      <div className="max-w-[87.5rem] h-screen m-auto p-10 ">
         <div className="flex justify-between items-center mb-8 ">
           <Link to="/" className="flex items-center gap-2 cursor-pointer">
             <ArrowLeft size={18} color="gray" />
@@ -39,7 +54,7 @@ export default function Product() {
             <img
               className="w-full h-full object-cover"
               src={data?.image}
-              alt=""
+              alt={data?.name}
             />
           </div>
 
