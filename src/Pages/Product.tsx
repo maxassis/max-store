@@ -47,13 +47,11 @@ export default function ProductPage() {
 
     if (!isProductInCart) {
       addItem(product);
-      // alert("Produto adicionado ao carrinho!");
       toast.success("Produto adicionado ao carrinho!", {
         position: "top-center",
         autoClose: 2000,
       });
     } else {
-      // alert("Este produto já está no carrinho!");
       toast.warning("Este produto já está no carrinho!", {
         position: "top-center",
         autoClose: 3000,
