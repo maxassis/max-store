@@ -73,7 +73,7 @@ export default function ProductPage() {
           <CarrinhoBtn />
         </div>
 
-        <div className="grid-cols-2 grid gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="aspect-square rounded-lg overflow-hidden">
             <img
               className="w-full h-full object-cover"
@@ -95,7 +95,7 @@ export default function ProductPage() {
             </p>
 
             <button
-              className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer"
+              className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer hover:bg-blue-500 transition-colors duration-200"
               onClick={() =>
                 addToCart({
                   id: id!,

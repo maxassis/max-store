@@ -52,13 +52,10 @@ const Sidebar = () => {
           )}
 
           {itens.length > 0 && (
-            <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm cursor-pointer">
+            <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm cursor-pointer hover:bg-blue-500 transition-colors duration-200 ">
               Finalizar Compra
             </button>
           )}
-          {/* <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm cursor-pointer">
-            Finalizar Compra
-          </button> */}
         </div>
       </div>
     </>
