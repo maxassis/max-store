@@ -42,14 +42,23 @@ const Sidebar = () => {
         </div>
 
         <div className="mt-4">
-          <div className="flex justify-between items-center">
-            <span className="text-lg font-medium">Total</span>
-            <span className="text-lg font-medium">R$ {valorTotal()}</span>
-          </div>
+          {itens.length === 0 ? (
+            <p className="text-center text-gray-500">Carrinho vazio.</p>
+          ) : (
+            <div className="flex justify-between items-center">
+              <span className="text-lg font-medium">Total</span>
+              <span className="text-lg font-medium">R$ {valorTotal()}</span>
+            </div>
+          )}
 
-          <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm cursor-pointer">
+          {itens.length > 0 && (
+            <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm cursor-pointer">
+              Finalizar Compra
+            </button>
+          )}
+          {/* <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-sm cursor-pointer">
             Finalizar Compra
-          </button>
+          </button> */}
         </div>
       </div>
     </>
