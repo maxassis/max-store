@@ -1,12 +1,24 @@
+import { useNavigate } from "react-router-dom";
+
 interface CardProps {
+  id: number;
   name: string;
   price: string;
   image: string;
 }
 
-export default function Card({ name, price, image }: CardProps) {
+export default function Card({ name, price, image, id }: CardProps) {
+  const navigate = useNavigate();
+
+  const goToProduct = (id: string) => {
+    navigate(`/product/${id}`);
+  };
+
   return (
-    <div className="w-full h-full rounded-lg overflow-hidden shadow-sm transition-shadow transition-300 hover:shadow-lg cursor-pointer group">
+    <div
+      onClick={() => goToProduct(id + "")}
+      className="w-full h-full rounded-lg overflow-hidden shadow-sm transition-shadow transition-300 hover:shadow-lg cursor-pointer group"
+    >
       <div className="aspect-square overflow-hidden">
         <img
           className="w-full h-full object-cover group-hover:scale-105 transition-transform transition-300"

@@ -9,7 +9,7 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/product/:id" element={<Product />} />
       </Routes>
     </Router>
   );
