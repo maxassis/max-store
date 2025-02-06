@@ -5,8 +5,9 @@ import CarrinhoBtn from "../components/CarrinhoBtn.tsx";
 interface Product {
   _id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
+  description: string;
 }
 
 async function fetchProducts(): Promise<Product[]> {
@@ -47,6 +48,7 @@ function Main() {
               price={product.price}
               image={product.image}
               id={product._id}
+              description={product.description}
             />
           ))}
         </div>

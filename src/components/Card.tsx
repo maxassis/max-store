@@ -1,13 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { formatoMoeda } from "../utils/money_format.ts";
 
 interface CardProps {
   id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
+  description: string;
 }
 
-export default function Card({ name, price, image, id }: CardProps) {
+export default function Card({
+  name,
+  price,
+  image,
+  id,
+  description,
+}: CardProps) {
   const navigate = useNavigate();
 
   const goToProduct = (id: string) => {
@@ -30,11 +38,11 @@ export default function Card({ name, price, image, id }: CardProps) {
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
 
-        <p className="mt-1 text-gray-600 text-sm">
-          Tablet leve e potente com tela retina e suporte a caneta digital.
-        </p>
+        <p className="mt-1 text-gray-600 text-sm">{description}</p>
 
-        <h3 className="text-blue-600 font-bold mt-2">R${price}</h3>
+        <h3 className="text-blue-600 font-bold mt-2">
+          {formatoMoeda.format(price)}
+        </h3>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import CarrinhoBtn from "../components/CarrinhoBtn";
 import { carrinhoStore } from "../store/carrinho.store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { formatoMoeda } from "../utils/money_format.ts";
 
 interface Product {
   _id: string;
@@ -83,7 +84,7 @@ export default function ProductPage() {
             <h1 className="text-3xl font-bold">{data?.name}</h1>
 
             <h3 className="text-blue-600 font-bold mt-5 text-xl">
-              R${data?.price}
+              {formatoMoeda.format(Number(data?.price))}
             </h3>
 
             <p className="mt-5 text-gray-600">{data?.description}</p>

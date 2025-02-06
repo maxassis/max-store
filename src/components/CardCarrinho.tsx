@@ -1,6 +1,7 @@
 import { Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
 import { carrinhoStore } from "../store/carrinho.store";
+import { formatoMoeda } from "../utils/money_format.ts";
 
 interface CardCarrinhoProps {
   id: string;
@@ -40,7 +41,9 @@ export default function CarrinhoBtn({
       />
       <div className="flex flex-1 flex-col ">
         <span className="block">{name}</span>
-        <span className="block text-sm text-gray-600">R${price}</span>
+        <span className="block text-sm text-gray-600">
+          {formatoMoeda.format(price)}
+        </span>
 
         <div className="flex items-center gap-4 mt-2">
           <button

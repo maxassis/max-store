@@ -1,6 +1,7 @@
 import { carrinhoStore } from "../store/carrinho.store";
 import { X } from "lucide-react";
 import CardCarrinho from "./CardCarrinho";
+import { formatoMoeda } from "../utils/money_format.ts";
 
 const Sidebar = () => {
   const { carrinho, toggle, itens, valorTotal } = carrinhoStore();
@@ -48,7 +49,9 @@ const Sidebar = () => {
           ) : (
             <div className="flex justify-between items-center">
               <span className="text-lg font-medium">Total</span>
-              <span className="text-lg font-medium">R$ {valorTotal()}</span>
+              <span className="text-lg font-medium">
+                {formatoMoeda.format(valorTotal())}
+              </span>
             </div>
           )}
 
