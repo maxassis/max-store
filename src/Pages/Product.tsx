@@ -15,9 +15,7 @@ interface Product {
 }
 
 async function fetchProduct(id: string): Promise<Product> {
-  const response = await fetch(
-    `https://run.mocky.io/v3/063305e4-5648-4083-b0c7-96acab55c1ae`
-  );
+  const response = await fetch(`http://localhost:3000/produtos/${id}`);
   if (!response.ok) {
     throw new Error("Erro ao buscar o produto");
   }

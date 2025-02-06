@@ -3,16 +3,14 @@ import Card from "../components/Card.tsx";
 import CarrinhoBtn from "../components/CarrinhoBtn.tsx";
 
 interface Product {
-  id: number;
+  _id: string;
   name: string;
   price: string;
   image: string;
 }
 
 async function fetchProducts(): Promise<Product[]> {
-  const response = await fetch(
-    "https://run.mocky.io/v3/09ec48e4-6cc8-45a9-8f9c-eb841cb468ed"
-  );
+  const response = await fetch("http://localhost:3000/produtos");
   if (!response.ok) {
     throw new Error("Erro ao buscar os produtos");
   }
@@ -43,11 +41,11 @@ function Main() {
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
           {data?.map((product) => (
             <Card
-              key={product.id}
+              key={product._id}
               name={product.name}
               price={product.price}
               image={product.image}
-              id={product.id}
+              id={product._id}
             />
           ))}
         </div>

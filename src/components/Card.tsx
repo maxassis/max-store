@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 interface CardProps {
-  id: number;
+  id: string;
   name: string;
   price: string;
   image: string;
@@ -16,7 +16,7 @@ export default function Card({ name, price, image, id }: CardProps) {
 
   return (
     <div
-      onClick={() => goToProduct(id + "")}
+      onClick={() => goToProduct(id)}
       className="w-full h-full rounded-lg overflow-hidden shadow-sm transition-shadow transition-300 hover:shadow-lg cursor-pointer group"
     >
       <div className="aspect-square overflow-hidden">
