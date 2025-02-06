@@ -32,11 +32,12 @@ const Sidebar = () => {
         <div>
           {itens.map((item) => (
             <CardCarrinho
-              id={item.id}
-              key={item.id}
+              id={item._id}
+              key={item._id}
               name={item.name}
               qtdProduct={item.qtdProduct}
               price={item.price}
+              image={item.image}
             />
           ))}
         </div>

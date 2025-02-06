@@ -7,11 +7,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Product {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   image: string;
   qtdProduct: number;
+  description: string;
 }
 
 async function fetchProduct(id: string): Promise<Product> {
@@ -41,7 +42,7 @@ export default function ProductPage() {
     );
 
   function addToCart(product: Product) {
-    const isProductInCart = itens.some((item) => item.id === product.id);
+    const isProductInCart = itens.some((item) => item._id === product._id);
 
     if (!isProductInCart) {
       addItem(product);
@@ -77,7 +78,7 @@ export default function ProductPage() {
               alt={data?.name}
             />
           </div>
-
+          {/* {JSON.stringify(data)} */}
           <div>
             <h1 className="text-3xl font-bold">{data?.name}</h1>
 
@@ -85,23 +86,11 @@ export default function ProductPage() {
               R${data?.price}
             </h3>
 
-            <p className="mt-5 text-gray-600">
-              Notebook premium com processador de última geração e design
-              elegante.
-            </p>
+            <p className="mt-5 text-gray-600">{data?.description}</p>
 
             <button
               className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer hover:bg-blue-500 transition-colors duration-200"
-              onClick={() =>
-                addToCart({
-                  id: id!,
-                  qtdProduct: 1,
-                  name: "Tablet Air",
-                  price: 600,
-                  image:
-                    "https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafkreibbibk4gsdpalapcmm4tctuj3ctonrvdd3m23qwvrtdsxtrh22na4",
-                })
-              }
+              onClick={() => addToCart(data!)}
             >
               <ShoppingCart size={16} color="white" />
               Adicionar ao carrinho

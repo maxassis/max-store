@@ -7,6 +7,7 @@ interface CardCarrinhoProps {
   name: string;
   price: number;
   qtdProduct: number;
+  image: string;
 }
 
 export default function CarrinhoBtn({
@@ -14,6 +15,7 @@ export default function CarrinhoBtn({
   name,
   price,
   qtdProduct,
+  image,
 }: CardCarrinhoProps) {
   const { increaseQuantity, decreaseQuantity, removeItem } = carrinhoStore();
   const [count, setCount] = useState(qtdProduct);
@@ -33,7 +35,7 @@ export default function CarrinhoBtn({
     <div className="flex justify-between items-center gap-5 border-b-[1px] border-gray-200 py-4">
       <img
         className="aspect-square rounded-lg overflow-hidden h-16 w-16"
-        src="https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafkreibbibk4gsdpalapcmm4tctuj3ctonrvdd3m23qwvrtdsxtrh22na4"
+        src={image}
         alt=""
       />
       <div className="flex flex-1 flex-col ">

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 type Item = {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   image: string;
@@ -33,13 +33,13 @@ export const carrinhoStore = create<State>()(
       // Adiciona um item ao carrinho ou aumenta a quantidade se já existir
       addItem: (item) =>
         set((state) => {
-          const itemExistente = state.itens.find((i) => i.id === item.id);
+          const itemExistente = state.itens.find((i) => i._id === item._id);
 
           if (itemExistente) {
             // Se o item já existe, aumenta a quantidade
             return {
               itens: state.itens.map((i) =>
-                i.id === item.id ? { ...i, qtdProduct: i.qtdProduct + 1 } : i
+                i._id === item._id ? { ...i, qtdProduct: i.qtdProduct + 1 } : i
               ),
             };
           } else {
@@ -51,14 +51,16 @@ export const carrinhoStore = create<State>()(
       // Remove um item do carrinho
       removeItem: (id) =>
         set((state) => ({
-          itens: state.itens.filter((item) => item.id !== id),
+          itens: state.itens.filter((item) => item._id !== id),
         })),
 
       // Aumenta a quantidade de um item
       increaseQuantity: (id) =>
         set((state) => ({
           itens: state.itens.map((item) =>
-            item.id === id ? { ...item, qtdProduct: item.qtdProduct + 1 } : item
+            item._id === id
+              ? { ...item, qtdProduct: item.qtdProduct + 1 }
+              : item
           ),
         })),
 
@@ -67,7 +69,7 @@ export const carrinhoStore = create<State>()(
         set((state) => ({
           itens: state.itens
             .map((item) =>
-              item.id === id
+              item._id === id
                 ? { ...item, qtdProduct: item.qtdProduct - 1 }
                 : item
             )
