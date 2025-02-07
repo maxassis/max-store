@@ -1,4 +1,4 @@
-import { ArrowLeft, ShoppingCart } from "lucide-react";
+import { ArrowLeft, Package, ShoppingCart } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import CarrinhoBtn from "../components/CarrinhoBtn";
@@ -14,6 +14,7 @@ interface Product {
   image: string;
   qtdProduct: number;
   description: string;
+  stock: number;
 }
 
 async function fetchProduct(id: string): Promise<Product> {
@@ -34,7 +35,13 @@ export default function ProductPage() {
     enabled: !!id,
   });
 
-  if (isLoading) return <p className="text-center text-xl">Carregando...</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <h1>Loading...</h1>
+      </div>
+    );
+
   if (isError)
     return (
       <p className="text-center text-xl text-red-500">
@@ -79,7 +86,6 @@ export default function ProductPage() {
               alt={data?.name}
             />
           </div>
-          {/* {JSON.stringify(data)} */}
           <div>
             <h1 className="text-3xl font-bold">{data?.name}</h1>
 
@@ -87,15 +93,35 @@ export default function ProductPage() {
               {formatoMoeda.format(Number(data?.price))}
             </h3>
 
+            <div className="mt-5 flex gap-2 items-center ">
+              <Package
+                size={16}
+                color={
+                  data && data?.stock > 0
+                    ? "#4a5565"
+                    : "oklch(0.704 0.191 22.216)"
+                }
+              />
+              {data && data.stock > 0 ? (
+                <span className="text-gray-600">
+                  {data?.stock} unidades em estoque
+                </span>
+              ) : (
+                <span className="text-red-400">Esgotado</span>
+              )}
+            </div>
+
             <p className="mt-5 text-gray-600">{data?.description}</p>
 
-            <button
-              className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer hover:bg-blue-500 transition-colors duration-200"
-              onClick={() => addToCart(data!)}
-            >
-              <ShoppingCart size={16} color="white" />
-              Adicionar ao carrinho
-            </button>
+            {data && data.stock > 0 && (
+              <button
+                className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer hover:bg-blue-500 transition-colors duration-200"
+                onClick={() => addToCart(data!)}
+              >
+                <ShoppingCart size={16} color="white" />
+                Adicionar ao carrinho
+              </button>
+            )}
           </div>
         </div>
       </div>

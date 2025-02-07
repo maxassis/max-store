@@ -9,6 +9,7 @@ interface CardCarrinhoProps {
   price: number;
   qtdProduct: number;
   image: string;
+  stock: number;
 }
 
 export default function CarrinhoBtn({
@@ -17,11 +18,13 @@ export default function CarrinhoBtn({
   price,
   qtdProduct,
   image,
+  stock,
 }: CardCarrinhoProps) {
   const { increaseQuantity, decreaseQuantity, removeItem } = carrinhoStore();
   const [count, setCount] = useState(qtdProduct);
 
-  function soma(id: string) {
+  function soma(id: string, stock: number) {
+    if (count === stock) return;
     setCount(count + 1);
     increaseQuantity(id);
   }
@@ -55,9 +58,11 @@ export default function CarrinhoBtn({
             </span>
           </button>
           {qtdProduct}
+
           <button
-            onClick={() => soma(id)}
-            className="h-8 w-8 text-2xl font-medium cursor-pointer border rounded-md grid place-items-center border-gray-300"
+            onClick={() => soma(id, stock)}
+            disabled={count === stock}
+            className="h-8 w-8 text-2xl font-medium cursor-pointer border rounded-md grid place-items-center border-gray-300 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-40"
           >
             <Plus size={16} />
           </button>

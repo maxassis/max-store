@@ -7,6 +7,8 @@ type Item = {
   price: number;
   image: string;
   qtdProduct: number;
+  description: string;
+  stock: number;
 };
 
 type State = {

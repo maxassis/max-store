@@ -39,6 +39,7 @@ const Sidebar = () => {
               qtdProduct={item.qtdProduct}
               price={item.price}
               image={item.image}
+              stock={item.stock}
             />
           ))}
         </div>
