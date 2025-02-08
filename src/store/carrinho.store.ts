@@ -13,19 +13,17 @@ type Item = {
   stock: number;
 };
 
-
 type State = {
-  carrinho: boolean; 
-  itens: Item[]; 
-  toggle: () => void; 
-  addItem: (item: Item) => Promise<void>; 
-  increaseQuantity: (id: string) => Promise<void>; 
-  decreaseQuantity: (id: string) => Promise<void>; 
-  removeItem: (id: string) => Promise<void>; 
-  valorTotal: () => number; 
-  totalItems: () => number; 
+  carrinho: boolean;
+  itens: Item[];
+  toggle: () => void;
+  addItem: (item: Item) => Promise<void>;
+  increaseQuantity: (id: string) => Promise<void>;
+  decreaseQuantity: (id: string) => Promise<void>;
+  removeItem: (id: string) => Promise<void>;
+  valorTotal: () => number;
+  totalItems: () => number;
 };
-
 
 const api = {
   updateCart: async (items: Item[]): Promise<void> => {
@@ -34,7 +32,7 @@ const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userId: id,
-        items, 
+        items,
       }),
     });
   },
@@ -45,7 +43,7 @@ export const carrinhoStore = create<State>()(
     (set, get) => ({
       carrinho: false,
       itens: [],
-      
+
       toggle: () => set((state) => ({ carrinho: !state.carrinho })),
       // Adiciona um item ao carrinho ou aumenta a quantidade se já existir
       addItem: async (item) => {
@@ -72,8 +70,8 @@ export const carrinhoStore = create<State>()(
       removeItem: async (id) => {
         set((state) => {
           const updatedItens = state.itens.filter((item) => item._id !== id);
-         
-          api.updateCart(updatedItens); 
+
+          api.updateCart(updatedItens);
           return { itens: updatedItens };
         });
       },
@@ -85,8 +83,8 @@ export const carrinhoStore = create<State>()(
               ? { ...item, qtdProduct: item.qtdProduct + 1 }
               : item
           );
-          
-          api.updateCart(updatedItens); 
+
+          api.updateCart(updatedItens);
           return { itens: updatedItens };
         });
       },
@@ -99,8 +97,8 @@ export const carrinhoStore = create<State>()(
                 ? { ...item, qtdProduct: item.qtdProduct - 1 }
                 : item
             )
-            .filter((item) => item.qtdProduct > 0); 
-          
+            .filter((item) => item.qtdProduct > 0);
+
           api.updateCart(updatedItens);
           return { itens: updatedItens };
         });
@@ -122,6 +120,9 @@ export const carrinhoStore = create<State>()(
     {
       name: "carrinho-store",
       storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({
+        itens: state.itens,
+      }),
     }
   )
 );
