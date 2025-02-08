@@ -33,7 +33,7 @@ function Main() {
     );
 
   return (
-    <div className="bg-gray-50 w-full h-full">
+    <div className="bg-gray-50 w-screen h-screen">
       <div className="max-w-[87.5rem] h-full m-auto p-10">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Max Store</h1>
@@ -41,17 +41,18 @@ function Main() {
         </div>
 
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
-          {data?.filter(item => item.stock > 0).map((product) => (
-            <Card
-              key={product._id}
-              name={product.name}
-              price={product.price}
-              image={product.image}
-              id={product._id}
-              description={product.description}
-            />
-          ))  
-          }
+          {data
+            ?.filter((item) => item.stock > 0)
+            .map((product) => (
+              <Card
+                key={product._id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                id={product._id}
+                description={product.description}
+              />
+            ))}
         </div>
       </div>
     </div>

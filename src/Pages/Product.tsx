@@ -67,7 +67,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="bg-gray-50 w-full h-full">
+    <div className="bg-gray-50 w-screen h-screen">
       <div className="max-w-[87.5rem] h-screen m-auto p-10 ">
         <div className="flex justify-between items-center mb-8 ">
           <Link to="/" className="flex items-center gap-2 cursor-pointer">
@@ -77,7 +77,7 @@ export default function ProductPage() {
 
           <CarrinhoBtn />
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="aspect-square rounded-lg overflow-hidden">
             <img
