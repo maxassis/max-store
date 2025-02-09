@@ -35,19 +35,19 @@ export default function ProductPage() {
     enabled: !!id,
   });
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <h1>Loading...</h1>
-      </div>
-    );
+  // if (isLoading)
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <h1>Loading...</h1>
+  //     </div>
+  //   );
 
-  if (isError)
-    return (
-      <p className="text-center text-xl text-red-500">
-        Erro ao carregar o produto.
-      </p>
-    );
+  // if (isError)
+  //   return (
+  //     <p className="text-center text-xl text-red-500">
+  //       Erro ao carregar o produto.
+  //     </p>
+  //   );
 
   function addToCart(product: Product) {
     const isProductInCart = itens.some((item) => item._id === product._id);
@@ -78,52 +78,72 @@ export default function ProductPage() {
           <CarrinhoBtn />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="aspect-square rounded-lg overflow-hidden">
-            <img
-              className="w-full h-full object-cover"
-              src={data?.image}
-              alt={data?.name}
-            />
+        {isLoading && (
+          <div className="flex justify-center items-center h-screen">
+            <h1>Loading...</h1>
           </div>
-          <div>
-            <h1 className="text-3xl font-bold">{data?.name}</h1>
+        )}
 
-            <h3 className="text-blue-600 font-bold mt-5 text-xl">
-              {formatoMoeda.format(Number(data?.price))}
-            </h3>
+        {isError && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6"
+            role="alert"
+          >
+            <strong className="font-bold">Erro:</strong>
+            <span className="block sm:inline">
+              &nbsp;Ocorreu um erro ao obter o produto, tente outra vez.
+            </span>
+          </div>
+        )}
 
-            <div className="mt-5 flex gap-2 items-center ">
-              <Package
-                size={16}
-                color={
-                  data && data?.stock > 0
-                    ? "#4a5565"
-                    : "oklch(0.704 0.191 22.216)"
-                }
+        {!isError && !isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="aspect-square rounded-lg overflow-hidden">
+              <img
+                className="w-full h-full object-cover"
+                src={data?.image}
+                alt={data?.name}
               />
-              {data && data.stock > 0 ? (
-                <span className="text-gray-600">
-                  {data?.stock} unidades em estoque
-                </span>
-              ) : (
-                <span className="text-red-400">Esgotado</span>
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold">{data?.name}</h1>
+
+              <h3 className="text-blue-600 font-bold mt-5 text-xl">
+                {formatoMoeda.format(Number(data?.price))}
+              </h3>
+
+              <div className="mt-5 flex gap-2 items-center ">
+                <Package
+                  size={16}
+                  color={
+                    data && data?.stock > 0
+                      ? "#4a5565"
+                      : "oklch(0.704 0.191 22.216)"
+                  }
+                />
+                {data && data.stock > 0 ? (
+                  <span className="text-gray-600">
+                    {data?.stock} unidades em estoque
+                  </span>
+                ) : (
+                  <span className="text-red-400">Esgotado</span>
+                )}
+              </div>
+
+              <p className="mt-5 text-gray-600">{data?.description}</p>
+
+              {data && data.stock > 0 && (
+                <button
+                  className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer hover:bg-blue-500 transition-colors duration-200"
+                  onClick={() => addToCart(data!)}
+                >
+                  <ShoppingCart size={16} color="white" />
+                  Adicionar ao carrinho
+                </button>
               )}
             </div>
-
-            <p className="mt-5 text-gray-600">{data?.description}</p>
-
-            {data && data.stock > 0 && (
-              <button
-                className="mt-5 bg-blue-600 text-white py-3 px-8 rounded-lg gap-2 flex items-center text-sm cursor-pointer hover:bg-blue-500 transition-colors duration-200"
-                onClick={() => addToCart(data!)}
-              >
-                <ShoppingCart size={16} color="white" />
-                Adicionar ao carrinho
-              </button>
-            )}
           </div>
-        </div>
+        )}
       </div>
       <ToastContainer />
     </div>

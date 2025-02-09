@@ -20,27 +20,39 @@ async function fetchProducts(): Promise<Product[]> {
 }
 
 function Main() {
-  const { data, isError } = useQuery({
+  const { data, isError, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
 
-  if (isError)
-    return (
-      <p className="text-center text-xl text-red-500">
-        Erro ao carregar os produtos.
-      </p>
-    );
-
   return (
     <div className="bg-gray-50 w-screen h-screen">
       <div className="max-w-[87.5rem] h-full m-auto p-10">
+        {/* Cabeçalho */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Max Store</h1>
           <CarrinhoBtn />
         </div>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
+        {isLoading && (
+          <div className="flex justify-center items-center h-screen">
+            <h1>Loading...</h1>
+          </div>
+        )}
+
+        {isError && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6"
+            role="alert"
+          >
+            <strong className="font-bold">Erro:</strong>
+            <span className="block sm:inline">
+              &nbsp;Ocorreu um erro ao obter os produtos, recarregue a pagina.
+            </span>
+          </div>
+        )}
+
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {data
             ?.filter((item) => item.stock > 0)
             .map((product) => (
