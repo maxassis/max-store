@@ -45,6 +45,13 @@ yarn dev
 ```
 O servidor será iniciado em `http://localhost:5173/` 
 
+## 🌍 Deploy
+
+O App está disponível no seguinte endereço:
+🔗 **[deploy do app](https://max-store-58t2.onrender.com/)**
+
+⚠ **Atenção**: O servidor de deploy do backend possui **cold start**, o que significa que a primeira requisição após um período de inatividade pode demorar alguns minutos para ser processada.
+
 ## 📂 Estrutura do Projeto
 ```
 📦 nome-do-repo
