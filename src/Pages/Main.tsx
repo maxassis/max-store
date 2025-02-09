@@ -26,7 +26,7 @@ function Main() {
   });
 
   return (
-    <div className="bg-gray-50 w-screen h-screen">
+    <div className="bg-gray-50 w-full h-full">
       <div className="max-w-[87.5rem] h-full m-auto p-10">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Max Store</h1>

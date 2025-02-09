@@ -53,7 +53,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="bg-gray-50 w-screen h-screen">
+    <div className="bg-gray-50 w-full h-full">
       <div className="max-w-[87.5rem] h-screen m-auto p-10 ">
         <div className="flex justify-between items-center mb-8 ">
           <Link to="/" className="flex items-center gap-2 cursor-pointer">
