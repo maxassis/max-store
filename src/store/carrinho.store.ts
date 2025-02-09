@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-const id = "1234567";
+const id = "1234567"; //  id do usuário para o carrinho no backend
 
 type Item = {
   _id: string;
@@ -25,6 +25,7 @@ type State = {
   totalItems: () => number;
 };
 
+// requisição para o carrinho no backend
 const api = {
   updateCart: async (items: Item[]): Promise<void> => {
     await fetch("http://localhost:3000/cart/", {
@@ -43,7 +44,6 @@ export const carrinhoStore = create<State>()(
     (set, get) => ({
       carrinho: false,
       itens: [],
-
       toggle: () => set((state) => ({ carrinho: !state.carrinho })),
       // Adiciona um item ao carrinho ou aumenta a quantidade se já existir
       addItem: async (item) => {
@@ -54,13 +54,13 @@ export const carrinhoStore = create<State>()(
             const updatedItens = state.itens.map((i) =>
               i._id === item._id ? { ...i, qtdProduct: i.qtdProduct + 1 } : i
             );
-            // Atualiza o carrinho no backend
-            api.updateCart(updatedItens); // Envia os itens atualizados
+
+            api.updateCart(updatedItens);
             return { itens: updatedItens };
           } else {
             // Se o item não existe, adiciona ao carrinho
             const updatedItens = [...state.itens, { ...item, qtdProduct: 1 }];
-            // Atualiza o carrinho no backend
+
             api.updateCart(updatedItens);
             return { itens: updatedItens };
           }
@@ -70,7 +70,6 @@ export const carrinhoStore = create<State>()(
       removeItem: async (id) => {
         set((state) => {
           const updatedItens = state.itens.filter((item) => item._id !== id);
-
           api.updateCart(updatedItens);
           return { itens: updatedItens };
         });
@@ -83,7 +82,6 @@ export const carrinhoStore = create<State>()(
               ? { ...item, qtdProduct: item.qtdProduct + 1 }
               : item
           );
-
           api.updateCart(updatedItens);
           return { itens: updatedItens };
         });
@@ -98,7 +96,6 @@ export const carrinhoStore = create<State>()(
                 : item
             )
             .filter((item) => item.qtdProduct > 0);
-
           api.updateCart(updatedItens);
           return { itens: updatedItens };
         });
@@ -123,6 +120,23 @@ export const carrinhoStore = create<State>()(
       partialize: (state) => ({
         itens: state.itens,
       }),
+      onRehydrateStorage: () => {
+        return (state, error) => {
+          if (error) {
+            console.error("Erro ao carregar o estado do carrinho:", error);
+          } else {
+            // Quando o estado for carregado, envia os itens para o backend
+            if (state && state?.itens.length > 0) {
+              api.updateCart(state.itens).catch((error) => {
+                console.error(
+                  "Erro ao sincronizar o carrinho com o backend:",
+                  error
+                );
+              });
+            }
+          }
+        };
+      },
     }
   )
 );
