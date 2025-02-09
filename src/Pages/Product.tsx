@@ -35,20 +35,6 @@ export default function ProductPage() {
     enabled: !!id,
   });
 
-  // if (isLoading)
-  //   return (
-  //     <div className="flex justify-center items-center h-screen">
-  //       <h1>Loading...</h1>
-  //     </div>
-  //   );
-
-  // if (isError)
-  //   return (
-  //     <p className="text-center text-xl text-red-500">
-  //       Erro ao carregar o produto.
-  //     </p>
-  //   );
-
   function addToCart(product: Product) {
     const isProductInCart = itens.some((item) => item._id === product._id);
 
