@@ -126,14 +126,13 @@ export const carrinhoStore = create<State>()(
             console.error("Erro ao carregar o estado do carrinho:", error);
           } else {
             // Quando o estado for carregado, envia os itens para o backend
-            if (state && state?.itens.length > 0) {
-              api.updateCart(state.itens).catch((error) => {
-                console.error(
-                  "Erro ao sincronizar o carrinho com o backend:",
-                  error
-                );
-              });
-            }
+            const itens = Array.isArray(state?.itens) ? state.itens : [];
+            api.updateCart(itens).catch((error) => {
+              console.error(
+                "Erro ao sincronizar o carrinho com o backend:",
+                error
+              );
+            });
           }
         };
       },
