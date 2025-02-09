@@ -12,7 +12,9 @@ interface Product {
 }
 
 async function fetchProducts(): Promise<Product[]> {
-  const response = await fetch("http://localhost:3000/produtos");
+  const response = await fetch(
+    "https://max-store-backend.onrender.com/produtos"
+  );
   if (!response.ok) {
     throw new Error("Erro ao buscar os produtos");
   }

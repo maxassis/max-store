@@ -28,7 +28,7 @@ type State = {
 // Função para fazer a requisição ao backend
 const api = {
   updateCart: async (items: Item[]): Promise<void> => {
-    await fetch("http://localhost:3000/cart/", {
+    await fetch("https://max-store-backend.onrender.com/cart/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
