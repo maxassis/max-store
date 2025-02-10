@@ -26,7 +26,7 @@ Este é um projeto frontend desenvolvido com **React**, utilizando **Zustand** p
    ```
 2. Acesse a pasta do projeto:
    ```sh
-   cd nome-do-repo
+   cd max-store
    ```
 3. Instale as dependências:
    ```sh
