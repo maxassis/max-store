@@ -10,6 +10,7 @@ export interface Product {
   image: string;
   description: string;
   stock: number;
+  qtdProduct: number;
 }
 
 function Main() {

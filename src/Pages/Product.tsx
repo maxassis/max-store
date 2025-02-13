@@ -6,6 +6,7 @@ import { carrinhoStore } from "../store/carrinho.store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatoMoeda } from "../utils/money_format.ts";
+import { fetchProduct } from "../api/requests.ts";
 
 interface Product {
   _id: string;
@@ -15,14 +16,6 @@ interface Product {
   qtdProduct: number;
   description: string;
   stock: number;
-}
-
-async function fetchProduct(id: string): Promise<Product> {
-  const response = await fetch(`http://localhost:3000/produtos/${id}`);
-  if (!response.ok) {
-    throw new Error("Erro ao buscar o produto");
-  }
-  return response.json();
 }
 
 export default function ProductPage() {
