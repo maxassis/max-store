@@ -6,24 +6,8 @@ import { carrinhoStore } from "../store/carrinho.store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatoMoeda } from "../utils/money_format.ts";
-
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  image: string;
-  qtdProduct: number;
-  description: string;
-  stock: number;
-}
-
-async function fetchProduct(id: string): Promise<Product> {
-  const response = await fetch(`http://localhost:3000/produtos/${id}`);
-  if (!response.ok) {
-    throw new Error("Erro ao buscar o produto");
-  }
-  return response.json();
-}
+import { fetchData } from "../api/requests.ts";
+import type { Product } from "../Pages/Main.tsx";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -31,7 +15,7 @@ export default function ProductPage() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["product", id],
-    queryFn: () => fetchProduct(id!),
+    queryFn: () => fetchData<Product>(`produtos/${id}`),
     enabled: !!id,
   });
 
