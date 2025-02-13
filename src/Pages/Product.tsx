@@ -7,16 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatoMoeda } from "../utils/money_format.ts";
 import { fetchProduct } from "../api/requests.ts";
-
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  image: string;
-  qtdProduct: number;
-  description: string;
-  stock: number;
-}
+import type { Product } from "../Pages/Main.tsx";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
