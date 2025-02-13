@@ -7,3 +7,11 @@ export async function fetchProducts(): Promise<Product[]> {
   }
   return response.json();
 }
+
+export async function fetchProduct(id: string): Promise<Product> {
+  const response = await fetch(`http://localhost:3000/produtos/${id}`);
+  if (!response.ok) {
+    throw new Error("Erro ao buscar o produto");
+  }
+  return response.json();
+}
