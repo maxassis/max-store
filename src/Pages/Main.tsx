@@ -1,22 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import Card from "../components/Card.tsx";
 import CarrinhoBtn from "../components/CarrinhoBtn.tsx";
+import { fetchProducts } from "../api/requests.ts";
 
-interface Product {
+export interface Product {
   _id: string;
   name: string;
   price: number;
   image: string;
   description: string;
   stock: number;
-}
-
-async function fetchProducts(): Promise<Product[]> {
-  const response = await fetch("http://localhost:3000/produtos");
-  if (!response.ok) {
-    throw new Error("Erro ao buscar os produtos");
-  }
-  return response.json();
 }
 
 function Main() {
