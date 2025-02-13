@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Card from "../components/Card.tsx";
 import CarrinhoBtn from "../components/CarrinhoBtn.tsx";
-import { fetchProducts } from "../api/requests.ts";
+import { fetchData } from "../api/requests.ts";
 
 export interface Product {
   _id: string;
@@ -16,7 +16,7 @@ export interface Product {
 function Main() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["products"],
-    queryFn: fetchProducts,
+    queryFn: () => fetchData<Product[]>("produtos"),
   });
 
   return (

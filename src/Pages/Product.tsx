@@ -6,7 +6,7 @@ import { carrinhoStore } from "../store/carrinho.store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatoMoeda } from "../utils/money_format.ts";
-import { fetchProduct } from "../api/requests.ts";
+import { fetchData } from "../api/requests.ts";
 import type { Product } from "../Pages/Main.tsx";
 
 export default function ProductPage() {
@@ -15,7 +15,7 @@ export default function ProductPage() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["product", id],
-    queryFn: () => fetchProduct(id!),
+    queryFn: () => fetchData<Product>(`produtos/${id}`),
     enabled: !!id,
   });
 
