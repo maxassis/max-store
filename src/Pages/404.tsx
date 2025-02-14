@@ -7,7 +7,7 @@ const NotFound = () => {
           Oops! Pagina não encontrada!
         </p>
         <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return a Loja
+          Retorne a Loja
         </a>
       </div>
     </div>
