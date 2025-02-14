@@ -1,50 +1,115 @@
-# React + TypeScript + Vite
+# Max Store Frontend 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white)
+![TanStack Query](https://img.shields.io/badge/TanStack%20Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
-Currently, two official plugins are available:
+## 📌 Descrição
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este é um projeto frontend desenvolvido com **React**, utilizando **Zustand** para gerenciamento de estado global, **TanStack Query** para gerenciamento de dados assíncronos, **Tailwind CSS** para estilização e **TypeScript** para tipagem estática.
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- ⚛️ React
+- 🐻 Zustand
+- 🔄 TanStack Query
+- 🎨 Tailwind CSS
+- 🔷 TypeScript
 
-- Configure the top-level `parserOptions` property like this:
+## 📦 Instalação
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/maxassis/max-store.git
+   ```
+2. Acesse a pasta do projeto:
+   ```sh
+   cd max-store
+   ```
+3. Instale as dependências:
+   ```sh
+   npm install
+   # ou
+   yarn install
+   ```
+
+## 🚀 Executando o Projeto
+
+Para iniciar o projeto em ambiente de desenvolvimento, utilize:
+```sh
+npm run dev
+# ou
+yarn dev
+```
+O servidor será iniciado em `http://localhost:5173/` 
+
+## 🌍 Deploy
+
+O App está disponível no seguinte endereço:
+🔗 **[deploy do app](https://max-store-58t2.onrender.com/)**
+
+⚠ **Atenção**: O servidor de deploy do backend possui **cold start**, o que significa que a primeira requisição após um período de inatividade pode demorar alguns minutos para ser processada.
+
+## 📂 Estrutura do Projeto
+```
+📦 nome-do-repo
+ ┣ 📂 src
+ ┃ ┣ 📂 components
+ ┃ ┣ 📂 pages
+ ┃ ┣ 📂 store (Zustand stores)
+ ┃ ┣ 📂 assets (Imagens, ícones e outros recursos)
+ ┃ ┗ 📜 main.tsx
+ ┣ 📜 tailwind.config.js
+ ┣ 📜 tsconfig.json
+ ┣ 📜 package.json
+ ┗ 📜 README.md
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## ✅ Funcionalidades
+- 🌐 Interface moderna e responsiva com Tailwind CSS
+- 🔄 Gerenciamento de estado simplificado com Zustand
+- 🚀 Gerenciamento de requisições e cache com TanStack Query
+- 📌 Tipagem segura e manutenção facilitada com TypeScript
+- 🛒 Funcionalidade de carrinho de compras local e no backend
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🛒 Carrinho de Compras
+- Armazena os itens no estado local utilizando **Zustand**.
+- Sincroniza os dados com o backend através do **TanStack Query**.
+- Permite adicionar, remover e atualizar quantidades de produtos no carrinho.
+- Persiste os itens do carrinho no backend, permitindo o envio de email com carrinhos perdidos para os clientes.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 🖼️ Screenshots
+
+### Página Inicial
+![Home](https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafybeifu7ahs4v5stf2gdteq5kp5nphhrhrzowhjnxisk3dj666biwdjsq)
+### Detalhes do Produto
+![Checkout](https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafybeicve66dyn3lxauticxqjxnohuybtpxjgnq6bwoxmqr4sgrzyopbgu)
+
+### Página do Carrinho
+![Carrinho](https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafybeieymnbtyv3y3xefq65ocdswbj7sctdzr64z7lkw6k3mw76y7zbhda)
+
+### Mobile
+![Checkout](https://yellow-fascinating-badger-992.mypinata.cloud/ipfs/bafkreidyp4drwuc7jkzglh6flm5wdcbdgl4asigcsveu7bar4knxzj3wqu)
+
+## 🔗 Repositório do Backend
+O backend da aplicação pode ser encontrado no seguinte repositório:
+[Repositorio Backend](https://github.com/maxassis/max-store-backend.git)
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Para contribuir:
+1. Faça um **fork** do projeto
+2. Crie uma **branch** para sua feature (`git checkout -b minha-feature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona minha feature'`)
+4. Faça um **push** para a branch (`git push origin minha-feature`)
+5. Abra um **Pull Request**
+
+## 📜 Licença
+
+Este projeto está sob a licença MIT. 
+
+---
+Feito com ❤️ por [Max Assis](https://github.com/maxassis)
+

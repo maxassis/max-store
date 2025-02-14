@@ -1,30 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import Card from "../components/Card.tsx";
 import CarrinhoBtn from "../components/CarrinhoBtn.tsx";
+import { fetchData } from "../api/requests.ts";
 
-interface Product {
+export interface Product {
   _id: string;
   name: string;
   price: number;
   image: string;
   description: string;
   stock: number;
-}
-
-async function fetchProducts(): Promise<Product[]> {
-  const response = await fetch(
-    "https://max-store-backend.onrender.com/produtos"
-  );
-  if (!response.ok) {
-    throw new Error("Erro ao buscar os produtos");
-  }
-  return response.json();
+  qtdProduct: number;
 }
 
 function Main() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["products"],
-    queryFn: fetchProducts,
+    queryFn: () => fetchData<Product[]>("produtos"),
   });
 
   return (
